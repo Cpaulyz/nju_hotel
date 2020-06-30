@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    # 如果测试的时候会报一大段警告信息，在下面url后面加上&useSSL=false！！！！
+     url: jdbc:mysql://localhost:3306/se2?serverTimezone=CTT&characterEncoding=UTF-8&useSSL=false
+     username: root      # 每个人不同 要记得改
+     password: 123456
+     driver-class-name: com.mysql.cj.jdbc.Driver
+     max-active: 200
+     max-idle: 20
+     min-idle: 10
+
+  thymeleaf:
+     cache: false
+  jackson:
+    time-zone: GMT+8
+
+mybatis:
+  mapper-locations: classpath:dataImpl/*/*Mapper.xml

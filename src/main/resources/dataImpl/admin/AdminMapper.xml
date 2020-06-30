@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.hotel.data.admin.AdminMapper">
+    <insert id="addUser" parameterType="com.example.hotel.po.User" useGeneratedKeys="true" keyProperty="id">
+        insert into User(email,password,usertype,username,phonenumber,credit)
+        values(#{email},#{password},#{userType},#{userName},#{phoneNumber},100)
+    </insert>
+    <update id="resetPassword">
+        update User set password='e10adc3949ba59abbe56e057f20f883e' where id = #{userId}
+--         这password如果后期有做修改的话要记得改掉
+    </update>
+    <select id="getAllManagers" resultMap="User">
+        select * from User where usertype='HotelManager'
+    </select>
+    <select id="getAllUsers" resultMap="User">
+        select * from User where usertype!='Admin'
+    </select>
+
+    <resultMap id="User" type="com.example.hotel.po.User">
+        <id column="id" property="id"></id>
+        <result column="email" property="email"></result>
+        <result column="password" property="password"></result>
+        <result column="username" property="userName"></result>
+        <result column="phonenumber" property="phoneNumber"></result>
+        <result column="credit" property="credit"></result>
+        <result column="usertype" property="userType"></result>
+        <result column="avatar" property="avatar"></result>
+    </resultMap>
+    <resultMap id="Hotel" type="com.example.hotel.vo.HotelVO">
+        <id column="id" property="id"></id>
+        <result column="address" property="address"></result>
+        <result column="bizRegion" property="bizRegion"></result>
+        <result column="hotelDescription" property="description"></result>
+        <result column="hotelStar" property="hotelStar"></result>
+        <result column="hotelName" property="name"></result>
+        <result column="phoneNum" property="phoneNum"></result>
+        <result column="rate" property="rate"></result>
+        <result column="manager_id" property="managerId"></result>
+    </resultMap>
+</mapper>

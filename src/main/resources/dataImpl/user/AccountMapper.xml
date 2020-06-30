@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.hotel.data.user.AccountMapper">
+    <insert id="createNewAccount" parameterType="com.example.hotel.po.User" useGeneratedKeys="true" keyProperty="id">
+            insert into User(email,password,username,phonenumber,credit,usertype)
+            values(#{email},#{password},#{userName},#{phoneNumber},#{credit},#{userType})
+    </insert>
+    <delete id="deleteUserById">
+        delete from User where id = #{id}
+    </delete>
+    <select id="getAccountByName" resultMap="User">
+            select * from User where email=#{email}
+    </select>
+    <select id="getAccountById" resultMap="User">
+            select * from User where id=#{id}
+    </select>
+    <update id="updateAccount">
+            update User set username=#{userName},phonenumber=#{phoneNumber} where id=#{id}
+    </update>
+    <update id="updateCredit">
+            update User set credit=#{result} where id=#{id}
+    </update>
+    <update id="updatePassword">
+        update User set password=#{password} where id=#{id}
+    </update>
+    <update id="updateAvatar">
+        update User set avatar=#{url} where id=#{id}
+    </update>
+
+
+    <resultMap id="User" type="com.example.hotel.po.User">
+        <id column="id" property="id"></id>
+        <result column="email" property="email"></result>
+        <result column="password" property="password"></result>
+        <result column="username" property="userName"></result>
+        <result column="phonenumber" property="phoneNumber"></result>
+        <result column="credit" property="credit"></result>
+        <result column="usertype" property="userType"></result>
+        <result column="avatar" property="avatar"></result>
+    </resultMap>
+</mapper>

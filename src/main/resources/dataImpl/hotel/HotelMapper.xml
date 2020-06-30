@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.hotel.data.hotel.HotelMapper">
+    <insert id="insertHotel" parameterType="com.example.hotel.po.Hotel"
+    useGeneratedKeys="true" keyProperty="id">
+        insert into Hotel(address,bizRegion,hotelDescription,hotelStar,hotelName,phoneNum,rate,manager_id)
+        values (#{address},#{bizRegion},#{description},#{hotelStar},#{hotelName},#{phoneNum},#{rate},#{managerId})
+    </insert>
+    <delete id="deleteHotelByHotelManagerId">
+        delete from hotel where manager_id=#{manager_id}
+    </delete>
+
+    <select id="selectAllHotel" resultMap="Hotel">
+        select * from Hotel
+    </select>
+    <select id="selectById" resultMap="Hotel">
+        select * from Hotel where id=#{id}
+    </select>
+    <select id="retrieveHotelsByManager" resultMap="Hotel">
+        select * from Hotel where manager_id=#{managerId}
+    </select>
+
+    <update id="updateRate">
+        update Hotel set rate = ((select AVG(grade) from Comment where hotel_id=#{hotelId})+rate)/2 where id=#{hotelId}
+    </update>
+    <update id="updateHotel" parameterType="com.example.hotel.po.Hotel">
+        update Hotel set address = #{address},hotelDescription=#{description},bizRegion=#{bizRegion},picture=#{picture} where id=#{id}
+    </update>
+
+    <!--这里字段不一样，返回的类型要用下面这个Map-->
+    <resultMap id="Hotel" type="com.example.hotel.vo.HotelVO">
+        <id column="id" property="id"></id>
+        <result column="address" property="address"></result>
+        <result column="bizRegion" property="bizRegion"></result>
+        <result column="hotelDescription" property="description"></result>
+        <result column="hotelStar" property="hotelStar"></result>
+        <result column="hotelName" property="name"></result>
+        <result column="phoneNum" property="phoneNum"></result>
+        <result column="rate" property="rate"></result>
+        <result column="manager_id" property="managerId"></result>
+        <result column="picture" property="picture"></result>
+    </resultMap>
+
+
+</mapper>
