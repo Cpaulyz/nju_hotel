@@ -27,16 +27,7 @@ function getBase64(img, callback) {
   reader.addEventListener('load', () => callback(reader.result));
   reader.readAsDataURL(img);
 }
-// const client = new oss({
-//     // accessKeyId: '',
-//     // accessKeySecret: '',
-//     // 公开到github之前把下面的删掉！
-//     accessKeyId: 'LTAI4G1YFPYT4T4Jjejgw4F7',
-//     accessKeySecret: 'vAX8e8pc9jJuzlqPUXFdiEPq4JYF4e',
-//     region: 'oss-cn-beijing', //
-//     bucket: 'nju-hotel',//
-//     host:'nju-hotel.oss-cn-beijing.aliyuncs.com'
-// })
+
 export default {
   data() {
     return {
